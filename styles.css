@@ -34,7 +34,7 @@
           animation: growMargins linear;
           animation-timeline: view();
           animation-range: entry 0% cover 100%;
-         margin-color: black;
+          color: black;
         }
 
       @keyframes growMargins {
@@ -42,3 +42,4 @@
         to   { margin-left: 10%; margin-right: 10%; }
 
 }
+
