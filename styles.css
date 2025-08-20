@@ -29,20 +29,6 @@
         h2{margin-left:25%; margin-right:25%; font-size:20px}
         p{margin-left:30%; margin-right:32%; font-size:16px; text-indent: 2em;}
         .header{margin-top:100px; margin-left:25%; margin-right:25%; font-size:24px; font-weight: bold}
-        .margin{
-         max-width: 800px;       /* controls how narrow the content is */
-        margin: 40px auto;      /* auto centers it (creates "margins" on left/right) */
-        padding: 20px;
-        background-color: black; /* the black margins behind it */
-        border-radius: 8px;
-        }
+        
 
-      @keyframes growMargins {
-        from { margin-left: 0; margin-right: 0;}
-        to   { margin-left: 10%; margin-right: 10%; }
-
-}
-
-
-
-
+     
