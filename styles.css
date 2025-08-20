@@ -3,6 +3,7 @@
         }
         .hero {
             height:750px;
+           padding: 40px;
         }
         body {
             font-family: Lora, serif;  
@@ -35,15 +36,13 @@
         background-color: black; /* the black margins behind it */
         border-radius: 8px;
         }
-         .content{
-         padding: 40px;
-         }
 
       @keyframes growMargins {
-        from { margin-left: 0; margin-right: 0; }
+        from { margin-left: 0; margin-right: 0;}
         to   { margin-left: 10%; margin-right: 10%; }
 
 }
+
 
 
 
