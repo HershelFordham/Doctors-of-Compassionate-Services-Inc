@@ -28,11 +28,12 @@
         h1{margin-left:25%; margin-right:25%; font-size:24px; font-weight: bold}
         h2{margin-left:25%; margin-right:25%; font-size:20px}
         p{margin-left:30%; margin-right:25%; font-size:16px; text-indent: 2em;}
-        .review{height:1000px; background-color: black;}
+        .review{height:1000px; background-color: black; linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 90%),}
         .footer{height:125px; background-color: grey;}
         
 
      
+
 
 
 
