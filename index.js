@@ -1,1 +1,1 @@
-alert("Hello! This is a simple alert message.");
+alert("ATTENTION: This is NOT an urgent care practice! If you are in need of immediate care please dial 911!");
