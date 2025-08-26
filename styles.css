@@ -32,7 +32,7 @@
         .footer{height:64px; background-color: grey; justify-content: center; font-size: 16px; color: white; display: flex; align-items: center;  margin: 0; padding: 0;}
         .end{height:75px; linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 90%),}
         .reviewbox{
-    height: auto; min-height: 50px; width: fit-content; width: max-content; display: inline-block; border: 2px solid black; border-radius: 16px; padding: px;
+    height: auto; min-height: 50px; width: fit-content; width: max-content; display: inline-block; border: 2px solid #D3C8B0; border-radius: 16px; padding: 16px; color: black; background-color: #D3C8B0; margin-top: 10px;
 }
 
      
