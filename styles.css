@@ -22,7 +22,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 32px;   
+            padding: 16px;   
         }
         h1, h2, p {color:#D3C8B0;}
         h1{margin-left:25%; margin-right:25%; font-size:24px; font-weight: bold}
@@ -36,6 +36,7 @@
 }
 
      
+
 
 
 
