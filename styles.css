@@ -24,6 +24,9 @@
             align-items: center;
             padding: 16px;   
         }
+        .officeourstory{
+           text-align: center; margin-top:25px;
+        }
         h1, h2, p {color:#D3C8B0;}
         h1{margin-left:25%; margin-right:25%; font-size:24px; font-weight: bold; margin-top: 128px;}
         h2{margin-left:25%; margin-right:25%; font-size:20px}
@@ -36,6 +39,7 @@
 }
 
      
+
 
 
 
