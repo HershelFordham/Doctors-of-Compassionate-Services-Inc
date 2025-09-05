@@ -1,191 +1,119 @@
-/* ===========================
-   Base & reset
-   =========================== */
-*,
-*::before,
-*::after { box-sizing: border-box; }
-
-html, body { height: 100%; }
-
+/* ================================
+   0) Critical syntax fixes (no visual change)
+   ================================ */
+/* Your background line had a stray token; this reproduces your same look, correctly */
 body {
-  margin: 0;
   font-family: Lora, serif;
-  line-height: 1.7;
-  color: #D3C8B0;
-  /* Gradients live on body; photo lives on a fixed pseudo layer (mobile-safe "fixed") */
   background:
-    linear-gradient(to bottom, rgba(0,0,0,1) 0%, transparent 45%),
-    linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 55%);
+    linear-gradient(to bottom, rgba(0,0,0,1) 0%, transparent 70%),
+    linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 80%),
+    url("Mock DOCS Website.jpg");
   background-repeat: no-repeat;
-  background-color: #000; /* fallback beneath everything */
+  background-attachment: fixed;     /* keep your original behavior */
+  background-size: cover;
+  background-position: center;
+  background-color: #000;           /* fallback under the image */
 }
 
-/* Photo layer that never "ends" */
-body::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: url("Mock DOCS Website.jpg") center/cover no-repeat;
-  /* If you really want classic parallax, comment this block and use:
-     body { background-attachment: fixed; background: ... url(...) center/cover no-repeat; } */
+/* Remove trailing comma that invalidates the rule */
+.end { height: 75px; }
+
+/* Images shouldn’t touch edges or overflow on small screens */
+img { max-width: 100%; height: auto; display: block; }
+
+/* Keep your logo band and scale the logo sanely */
+.logo img { height: auto; max-height: 120px; }
+
+/* Keep your existing styles above; everything below only changes layout at smaller widths */
+
+
+/* ================================
+   1) Nav: keep pipes, just wrap nicely on smaller screens
+   ================================ */
+@media (max-width: 64em) {   /* ~1024px and down */
+  .top-bar { padding: 12px 16px; }
+
+  /* Your original nav pushes left with margin-left:55%; override that on smaller screens */
+  .top-bar nav {
+    margin-left: 0 !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;                /* space between links (pipes still render because they’re in HTML) */
+    align-items: center;
+  }
+
+  .top-bar a { font-size: 15px; }
 }
 
-/* A simple centered column for long text (replaces giant % margins) */
-.overlay {
-  width: min(100%, 65ch);
-  margin: 0 auto;
-  padding: clamp(16px, 4vw, 24px);
+@media (max-width: 40em) {   /* ~640px and down */
+  .top-bar a { font-size: 14px; }
+  .patientportal { padding: 8px 12px; border-radius: 14px; }
 }
 
-/* Keep your text color/feel */
-h1, h2, p { color: #D3C8B0; margin: 0 0 0.75rem; }
-h1 { font-size: clamp(22px, 3.4vw, 28px); font-weight: 700; margin-top: clamp(32px, 8vw, 96px); }
-h2 { font-size: clamp(18px, 2.6vw, 22px); margin-top: 1.25rem; }
-p  { font-size: clamp(15px, 1.9vw, 16.5px); text-indent: 2em; line-height: 1.9; }
 
-/* Slightly reduce indent on very small screens for readability */
-@media (max-width: 28em){
+/* ================================
+   2) Content widths: keep your centered feel without huge % margins on phones
+   ================================ */
+/* Your originals:
+   h1{ margin-left:25%; margin-right:25%; }
+   h2{ margin-left:25%; margin-right:25%; }
+   p { margin-left:30%; margin-right:25%; }
+   We only loosen these on smaller screens; desktop remains unchanged.
+*/
+
+@media (max-width: 80em) {   /* ~1280px and down */
+  h1, h2 { margin-left: 18%; margin-right: 18%; }
+  p      { margin-left: 20%; margin-right: 18%; }
+}
+
+@media (max-width: 64em) {   /* ~1024px and down */
+  h1, h2 { margin-left: 12%; margin-right: 12%; }
+  p      { margin-left: 14%; margin-right: 12%; text-indent: 1.5em; }
+}
+
+@media (max-width: 48em) {   /* ~768px and down */
+  h1, h2 { margin-left: 8%; margin-right: 8%; }
+  p      { margin-left: 8%; margin-right: 8%; text-indent: 1.25em; }
+}
+
+@media (max-width: 35em) {   /* ~560px and down */
+  h1, h2, p { margin-left: 4%; margin-right: 4%; }
   p { text-indent: 1em; }
 }
 
-/* Make images scale and center where intended */
-img { max-width: 100%; height: auto; }
-
-.logo { 
-  text-align: center; 
-  margin-top: 25px; 
-  background: #D3C8B0; /* your original band color */
-}
-.logo img {
-  display: inline-block;
-  padding: 8px;
-  height: clamp(40px, 7vw, 84px);
-  width: auto;
-}
-
-/* Office story image centered with spacing */
+/* Center the office staff image inside its own section (keeps your styling) */
 .officeourstory { text-align: center; margin-top: 25px; }
-.officeourstory img { border-radius: 10px; }
+.officeourstory img { display: inline-block; border-radius: 8px; }
 
-/* ===========================
-   Top bar / nav
-   =========================== */
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px clamp(16px, 4vw, 32px);
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: saturate(120%) blur(6px);
+/* Utility aligners you can use anywhere without changing existing styles */
+.img-left  { margin-right: auto; }
+.img-right { margin-left:  auto; }
+.img-center{ margin-left: auto; margin-right: auto; }
+
+
+/* ================================
+   3) Hero: avoid giant fixed height on small screens
+   ================================ */
+/* Keep your big hero on desktop, but let it shrink on smaller devices so it doesn’t overflow */
+@media (max-width: 80em) {
+  .hero { height: 1100px; }
+}
+@media (max-width: 64em) {
+  .hero { height: 900px; }
+}
+@media (max-width: 48em) {
+  .hero { height: 60vh; min-height: 420px; }  /* still feels large, but flexible */
+}
+@media (max-width: 35em) {
+  .hero { height: 50vh; min-height: 360px; }
 }
 
-/* Your nav links + pipes (pipes are in your HTML) */
-.top-bar nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;            /* graceful spacing when it wraps */
-  margin: 0;            /* remove the old big left push */
+
+/* ================================
+   4) Small polish: keep your palette, improve readability slightly on tiny screens
+   ================================ */
+@media (max-width: 35em) {
+  h1 { font-size: 22px; }
+  h2 { font-size: 18px; }
+  p  { font-size: 16px; line-height: 1.9; }
 }
-
-/* Keep your link styling */
-a { text-decoration: none; color: #D3C8B0; }
-a:hover { opacity: 0.9; }
-
-/* Patient portal button (your original color/shape) */
-.patientportal{
-  background-color: #8C52FF; 
-  border-radius: 16px; 
-  padding: 10px 14px; 
-  border: #8C52FF;
-  color: #fff;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-/* Focus rings for accessibility */
-.patientportal:focus-visible,
-.top-bar nav a:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 3px;
-}
-
-/* ===========================
-   Hero
-   =========================== */
-.hero {
-  /* Remove fixed 1500px; use responsive height that feels like your original "large hero" */
-  min-height: clamp(46vh, 60vh, 72vh);
-  display: grid;
-  place-items: center;
-  padding: 16px;
-  position: relative;
-}
-
-/* Gentle fade into content below */
-.hero::after{
-  content:"";
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.65) 85%);
-  pointer-events: none;
-}
-
-/* ===========================
-   Footer & utility sections
-   =========================== */
-.footer{
-  height: 64px; 
-  background-color: grey; 
-  color: #fff;
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  font-size: 14px; 
-  padding: 0 16px;
-  text-align: center;
-  margin: 0;
-}
-
-/* Decorative end spacer (remove stray comma, keep intention) */
-.end { height: 75px; }
-
-/* Review section (you had it; leaving intact) */
-.review{
-  min-height: 600px; 
-  background-color: #000; 
-  margin: 0; 
-  padding: 0; 
-  color: #D3C8B0;
-}
-.reviewbox{
-  height: auto; 
-  min-height: 50px; 
-  display: inline-block; 
-  border: 2px solid #D3C8B0; 
-  border-radius: 16px; 
-  padding: 16px; 
-  color: #000; 
-  background-color: #D3C8B0; 
-  margin-top: 10px;
-}
-
-/* ===========================
-   Responsive tweaks
-   =========================== */
-/* Make nav links a bit smaller on narrow phones so they wrap nicely with pipes */
-@media (max-width: 30em){
-  .top-bar nav a { font-size: 14px; }
-}
-
-/* Widen text column slightly on larger screens to keep your airy feel */
-@media (min-width: 64em){
-  .overlay { width: min(100%, 72ch); }
-}
-
-/* If you later add anchors with ids (#story/#providers/#team/#contact),
-   this prevents headings from hiding under the sticky bar */
-h1[id], h2[id], .story[id] { scroll-margin-top: 90px; }
