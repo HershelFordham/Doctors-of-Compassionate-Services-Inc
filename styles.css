@@ -1,14 +1,17 @@
    body, html{
           height: 100%;
+          margin: 0;
         }
         .hero {
             height:1500px;
+           padding: 0;
         }
         body {
             font-family: Lora, serif;  
             background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, transparent 70%), linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 80%), url("Mock DOCS Website.jpg"); rgba(0,0,0,0.2), background-repeat: no-repeat; background-attachment: fixed; background-size: cover;
         }
-        .logo {text-align: center; margin-top: 25px; background: #D3C8B0;}
+        .logo {text-align: center; margin-top: 25px; background: #D3C8B0; display: block; width: 100%
+        .logo img{ display: block; margin: 0 auto; max-width: 100%; height-auto; max-height: 220px;}
         nav{
             color: #D3C8B0; font-size: 16px; text-align: left; margin-left: 55%; 
         }
@@ -40,6 +43,7 @@
            h1, h2, p { margin-left: 10%; margin-right: 10%; }
            .hero { height: 900px; }
 }
+           .logo img{max-height: 140px;}
            .logo {max-width: 90%; height: auto;}
 /* Phone adjustments (~640px and below) */
          @media (max-width: 40em) {
@@ -48,9 +52,11 @@
            p { text-indent: 1em; }
            .hero { height: 60vh; min-height: 400px; }
 }
+           .logo img{max-height: 100px;}
            .logo {max-width:70%; height: auto;}
 
      
+
 
 
 
