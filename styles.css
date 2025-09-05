@@ -1,44 +1,191 @@
-   body, html{
-          height: 100%;
-        }
-        .hero {
-            height:1500px;
-        }
-        body {
-            font-family: Lora, serif;  
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, transparent 70%), linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 80%), url("Mock DOCS Website.jpg"); rgba(0,0,0,0.2), background-repeat: no-repeat; background-attachment: fixed; background-size: cover;
-        }
-        .logo {text-align: center; margin-top: 25px; background: #D3C8B0;}
-        nav{
-            color: #D3C8B0; font-size: 16px; text-align: left; margin-left: 55%; 
-        }
-        a{
-            text-decoration:none; color: #D3C8B0;
-        }
-        .patientportal{
-            background-color: #8C52FF; border-radius: 16px; padding: 10px; border: #8C52FF;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px;   
-        }
-        h1, h2, p {color:#D3C8B0;}
-        h1{margin-left:25%; margin-right:25%; font-size:24px; font-weight: bold; margin-top: 128px;}
-        h2{margin-left:25%; margin-right:25%; font-size:20px}
-        p{margin-left:30%; margin-right:25%; font-size:16px; text-indent: 2em; line-height: 2;}
-        .review{height:1000px; background-color: black; margin: 0; padding: 0; color: #D3C8B0;}
-        .footer{height:64px; background-color: grey; justify-content: center; font-size: 16px; color: white; display: flex; align-items: center;  margin: 0; padding: 0;}
-        .end{height:75px; linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 90%),}
-        .reviewbox{
-    height: auto; min-height: 50px; width: fit-content; width: max-content; display: inline-block; border: 2px solid #D3C8B0; border-radius: 16px; padding: 16px; color: black; background-color: #D3C8B0; margin-top: 10px;
+/* ===========================
+   Base & reset
+   =========================== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: Lora, serif;
+  line-height: 1.7;
+  color: #D3C8B0;
+  /* Gradients live on body; photo lives on a fixed pseudo layer (mobile-safe "fixed") */
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,1) 0%, transparent 45%),
+    linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 55%);
+  background-repeat: no-repeat;
+  background-color: #000; /* fallback beneath everything */
 }
 
-     
+/* Photo layer that never "ends" */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url("Mock DOCS Website.jpg") center/cover no-repeat;
+  /* If you really want classic parallax, comment this block and use:
+     body { background-attachment: fixed; background: ... url(...) center/cover no-repeat; } */
+}
 
+/* A simple centered column for long text (replaces giant % margins) */
+.overlay {
+  width: min(100%, 65ch);
+  margin: 0 auto;
+  padding: clamp(16px, 4vw, 24px);
+}
 
+/* Keep your text color/feel */
+h1, h2, p { color: #D3C8B0; margin: 0 0 0.75rem; }
+h1 { font-size: clamp(22px, 3.4vw, 28px); font-weight: 700; margin-top: clamp(32px, 8vw, 96px); }
+h2 { font-size: clamp(18px, 2.6vw, 22px); margin-top: 1.25rem; }
+p  { font-size: clamp(15px, 1.9vw, 16.5px); text-indent: 2em; line-height: 1.9; }
 
+/* Slightly reduce indent on very small screens for readability */
+@media (max-width: 28em){
+  p { text-indent: 1em; }
+}
 
+/* Make images scale and center where intended */
+img { max-width: 100%; height: auto; }
 
+.logo { 
+  text-align: center; 
+  margin-top: 25px; 
+  background: #D3C8B0; /* your original band color */
+}
+.logo img {
+  display: inline-block;
+  padding: 8px;
+  height: clamp(40px, 7vw, 84px);
+  width: auto;
+}
 
+/* Office story image centered with spacing */
+.officeourstory { text-align: center; margin-top: 25px; }
+.officeourstory img { border-radius: 10px; }
+
+/* ===========================
+   Top bar / nav
+   =========================== */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px clamp(16px, 4vw, 32px);
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: saturate(120%) blur(6px);
+}
+
+/* Your nav links + pipes (pipes are in your HTML) */
+.top-bar nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;            /* graceful spacing when it wraps */
+  margin: 0;            /* remove the old big left push */
+}
+
+/* Keep your link styling */
+a { text-decoration: none; color: #D3C8B0; }
+a:hover { opacity: 0.9; }
+
+/* Patient portal button (your original color/shape) */
+.patientportal{
+  background-color: #8C52FF; 
+  border-radius: 16px; 
+  padding: 10px 14px; 
+  border: #8C52FF;
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Focus rings for accessibility */
+.patientportal:focus-visible,
+.top-bar nav a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ===========================
+   Hero
+   =========================== */
+.hero {
+  /* Remove fixed 1500px; use responsive height that feels like your original "large hero" */
+  min-height: clamp(46vh, 60vh, 72vh);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  position: relative;
+}
+
+/* Gentle fade into content below */
+.hero::after{
+  content:"";
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.65) 85%);
+  pointer-events: none;
+}
+
+/* ===========================
+   Footer & utility sections
+   =========================== */
+.footer{
+  height: 64px; 
+  background-color: grey; 
+  color: #fff;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-size: 14px; 
+  padding: 0 16px;
+  text-align: center;
+  margin: 0;
+}
+
+/* Decorative end spacer (remove stray comma, keep intention) */
+.end { height: 75px; }
+
+/* Review section (you had it; leaving intact) */
+.review{
+  min-height: 600px; 
+  background-color: #000; 
+  margin: 0; 
+  padding: 0; 
+  color: #D3C8B0;
+}
+.reviewbox{
+  height: auto; 
+  min-height: 50px; 
+  display: inline-block; 
+  border: 2px solid #D3C8B0; 
+  border-radius: 16px; 
+  padding: 16px; 
+  color: #000; 
+  background-color: #D3C8B0; 
+  margin-top: 10px;
+}
+
+/* ===========================
+   Responsive tweaks
+   =========================== */
+/* Make nav links a bit smaller on narrow phones so they wrap nicely with pipes */
+@media (max-width: 30em){
+  .top-bar nav a { font-size: 14px; }
+}
+
+/* Widen text column slightly on larger screens to keep your airy feel */
+@media (min-width: 64em){
+  .overlay { width: min(100%, 72ch); }
+}
+
+/* If you later add anchors with ids (#story/#providers/#team/#contact),
+   this prevents headings from hiding under the sticky bar */
+h1[id], h2[id], .story[id] { scroll-margin-top: 90px; }
